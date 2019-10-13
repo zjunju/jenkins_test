@@ -6,6 +6,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
+                sh 'python -m pip install -r requirments.txt'
             }
         }
     }
