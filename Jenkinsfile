@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh 'ls -al'
                 sh 'python'
+                sh 'pwd'
             }
         }
     }
