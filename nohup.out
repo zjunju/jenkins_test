@@ -1,0 +1,22 @@
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+[21/May/2019 11:48:15] "GET / HTTP/1.1" 200 75578
+[21/May/2019 11:48:15] "GET /static/app/css/media.css HTTP/1.1" 304 0
+[21/May/2019 11:48:15] "GET /static/app/css/base.css HTTP/1.1" 200 2004
+[21/May/2019 11:48:15] "GET /static/app/css/comment.css HTTP/1.1" 304 0
+[21/May/2019 11:48:15] "GET /static/app/css/dashboard.css HTTP/1.1" 200 405406
+[21/May/2019 11:48:15] "GET /static/app/js/require.min.js HTTP/1.1" 200 17738
+[21/May/2019 11:48:15] "GET /static/app/js/dashboard.js HTTP/1.1" 200 3468
+[21/May/2019 11:48:15] "GET /static/app/css/reset.css HTTP/1.1" 200 986
+[21/May/2019 11:48:15] "GET /static/app/js/base.js HTTP/1.1" 200 10003
+[21/May/2019 11:48:16] "GET /static/app/js/vendors/jquery-3.2.1.min.js HTTP/1.1" 200 86659
+[21/May/2019 11:48:16] "GET /static/app/js/vendors/selectize.min.js HTTP/1.1" 200 103580
+[21/May/2019 11:48:16] "GET /static/app/js/vendors/bootstrap.bundle.min.js HTTP/1.1" 200 69267
+[21/May/2019 11:48:16] "GET /static/app/js/core.js HTTP/1.1" 200 2600
+Not Found: /favicon.ico
+[21/May/2019 11:48:16] "GET /favicon.ico HTTP/1.1" 404 2898
+[21/May/2019 11:48:36] "POST /verification/ HTTP/1.1" 302 0
+[21/May/2019 11:48:36] "GET / HTTP/1.1" 200 75475
+[21/May/2019 11:48:59] "POST /change_ignore/ HTTP/1.1" 200 38
+[21/May/2019 11:49:00] "POST /change_ignore/ HTTP/1.1" 200 38
+[21/May/2019 11:49:19] "POST /verification/ HTTP/1.1" 302 0
+[21/May/2019 11:49:19] "GET / HTTP/1.1" 200 75446

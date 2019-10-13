@@ -1,2 +1,1 @@
-# jenkins_test
-jenkins_test
+__init__

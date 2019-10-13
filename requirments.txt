@@ -1,0 +1,7 @@
+fabric=2.4.0
+celery==4.3.0
+celery-with-redis==3.0
+Django==2.2.1
+django-celery==3.2.2
+redis==3.2.1
+requests==2.21.0

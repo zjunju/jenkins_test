@@ -1,0 +1,22 @@
+[2019-10-12 14:43:40,447: INFO/MainProcess] Connected to redis://localhost:6379/1
+[2019-10-12 14:43:40,458: INFO/MainProcess] mingle: searching for neighbors
+[2019-10-12 14:43:41,488: INFO/MainProcess] mingle: all alone
+[2019-10-12 14:43:41,533: WARNING/MainProcess] /usr/local/lib/python3.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2019-10-12 14:43:41,534: INFO/MainProcess] celery@czydeMacBook-Pro.local ready.
+[2019-10-12 14:44:34,497: INFO/MainProcess] Connected to redis://localhost:6379/1
+[2019-10-12 14:44:34,508: INFO/MainProcess] mingle: searching for neighbors
+[2019-10-12 14:44:35,537: INFO/MainProcess] mingle: all alone
+[2019-10-12 14:44:35,554: WARNING/MainProcess] /usr/local/lib/python3.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2019-10-12 14:44:35,554: INFO/MainProcess] celery@czydeMacBook-Pro.local ready.
+[2019-10-12 14:45:00,074: INFO/MainProcess] Received task: app.tasks.backup_db_periodic_task[5ed8a4a0-384e-418d-b84b-247ca0aa5f62]  
+[2019-10-12 14:45:00,117: ERROR/ForkPoolWorker-1] Task app.tasks.backup_db_periodic_task[5ed8a4a0-384e-418d-b84b-247ca0aa5f62] raised unexpected: AttributeError("'NoneType' object has no attribute 'project_path'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/celery/app/trace.py", line 648, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/Users/czy/Projects/xmgl/app/tasks.py", line 87, in backup_db_periodic_task
+    path = site.project_path
+AttributeError: 'NoneType' object has no attribute 'project_path'

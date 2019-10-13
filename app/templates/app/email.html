@@ -1,0 +1,53 @@
+<div class="box">
+    <table style="border: 1px solid #ccc;">
+        <tr style="border: 1px solid #ccc;">
+            <th>站点名称</th>
+            <th>证书剩余时间</th>
+            <th>证书响应时间</th>
+            <th>状态码</th>
+            <th>是否通过</th>
+        </tr>
+        
+        {% for history in site_history %}
+        <tr style="border: 1px solid #ccc">
+            <td style="text-align: center; border: 1px solid black">
+                <a href="{% if history.site.need_verification %}https://{% else %}http://{% endif %}{{ history.site.href }}">{{ history.site.name }}</a>
+            </td>
+            <td style="text-align: center; border: 1px solid black">
+              {% if history.certificate %}
+                <span style="{% if history.certificate <= 14 %}color{% endif %}">证书剩余时间<br>{{ history.certificate }}天</span>
+              {% elif history.certificate == 0 %}
+                <span class="text-danger">证书已过期</span>
+              {% else %}
+                <span>证书：无</span>
+              {% endif %}
+            </td>
+            {% if history.ping_time %}
+                <td style="border: 1px solid black;text-align: center;">
+                    响应时间<br>{{ history.ping_time }}毫秒
+                </td>
+            {% else %}
+              <td style="color: red; border: 1px solid black;text-align: center;">超时</td> 
+            {% endif %}
+
+            {% if history.status_code == 200 %}
+                <td style="text-align: center; border: 1px solid black">
+                    {{ history.status_code }}
+                </td>
+            {% else %}
+                <td style="text-align: center; border: 1px solid black;color:red;" >
+                    {{ history.status_code }}
+                </td>
+            {% endif %}
+            
+            <td style="text-align: center; border: 1px solid black">
+                {% if history.site_type == '1' %}
+                    通过
+                {% else %}
+                    <span style="color: red">不通过</span>
+                {% endif %}
+            </td>
+        {% endfor %}
+        </tr>
+    </table>
+</div>

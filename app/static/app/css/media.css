@@ -1,0 +1,93 @@
+@media screen and (max-width: 768px){
+    div.popo-content{
+        width: 90%!important;
+        background: #fff;
+        z-index: 1001;
+    }
+    th[name=site-coding-th], td[name=site-coding]{
+        display: none;
+    }
+
+    a.icon.mr-20{
+        margin-right: 0;
+    }
+
+    td[name=site-href]{
+        min-width: 65px;
+    }
+
+    .sm-center{
+        text-align: center;
+    }
+
+    div.operate-btn{
+        text-align: center;
+    }
+
+    tbody[name=history-tbody]{
+        font-size: 1rem!important;
+    }
+
+    tbody[name=history-tbody] tr{
+        max-width: 50px; 
+    }
+
+
+    tr[name=site-description]{
+        font-size: 0.9rem!important;
+    }
+    
+
+    td[name=site-name]{
+        max-width: 100px;
+    }
+
+    th[name=site-https-th]{
+        max-width: 20px;
+        padding: .5rem 0!important;
+        text-align: center;
+    }
+
+    th[name=is-ignore-td], td[name=site-options]{
+        white-space: nowrap;
+    }
+
+
+    tbody[name=history-tbody] tr>td:first-of-type{
+        padding: 0;
+        padding-left: 5px;
+
+    }
+
+    /*tbody[name=history-tbody] tr>td:nth-of-type(2){
+        word-wrap:break-word!important;
+        word-break:break-all!important;
+    }*/
+
+    th[name=site-https-th]{
+        display: none;
+    }
+
+    td[name=site-needverification]{
+        display: none;
+    }
+    
+    td[name=site-options], th[name=site-options]{
+        width: 100px!important;
+        box-sizing: border-box;
+    }
+
+    td[name=site-options]>a{
+        display: block;
+    }
+
+    td[name=run-script]{
+        padding: 0;
+    }    
+
+    td[name=run-script] button{
+        margin-bottom: 10px;
+        margin-left: 0!important;
+    }
+}
+

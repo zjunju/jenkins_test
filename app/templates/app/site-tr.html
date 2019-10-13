@@ -1,0 +1,51 @@
+  <tr data-num="{{ site.pk }}">
+    <td name="is_verification">
+      <input type="checkbox" name="site-pk-checkbox" value="{{ site.pk }}" checked>
+    </td>
+    <td name='is-ignore-td'>
+      <input type="checkbox" name="is-ignore" value="{{ site.pk }}" {% if site.is_ignore %}{% else %}checked='true'{% endif %} >
+    </td>
+    
+    <td name="site-name"><a href="{% if site.need_verification %}https{% else %}http{% endif %}://{{ site.href }}">{{ site.name }}</a></td>
+    
+    <td name="site-coding">
+      {% if site.coding %}
+        <a href="https://{{ site.coding }}" class="tag tag-primary">
+          进入
+        </a>
+      {% else %}
+        <span class="tag tag-gray">暂无</span>
+      {% endif %}
+    </td>
+    
+    <td name="site-needverification" >
+      <span class="tag tag-{% if site.need_verification %}pink{% else %}blue{% endif %}">{{ site.need_verification }}</span>
+    </td>
+
+    <td name="site-options">
+      <a class="mr-20" href="javascript:void(0)" data-type="editor-site" data-name="{{ site.name }}" data-href="{{ site.href }}" data-coding="{% if site.coding %}{{ site.coding }}{% endif %}" data-verification="{{ site.need_verification }}" data-overseas="{{ site.overseas }}" data-num="{{ site.pk }}" data-restart="{{ site.restart }}" data-deploy="{{ site.deploy }}" data-update-cert="{{ site.update_cert }}" data-copy="{{ site.copy }}">
+        编辑
+        <!-- <i class="fe fe-edit a-i"></i> -->
+      </a>
+
+      <a href="javascript:void(0)" class="" data-type="delete-site" data-num="{{ site.pk }}">
+        删除
+        <!-- <i class="fe fe-trash a-i"></i> -->
+      </a>
+    </td>
+
+    <td name="run-script">
+      <button class="tag tag-pink" name="restart-btn" data-id="{{ site.pk }}" data-action="restart">
+        重启
+      </button>
+      <button class="tag tag-blue" name="deploy-btn" data-id="{{ site.pk }}" data-action="deploy">
+        部署
+      </button>
+      <button class="tag tag-azure" name="update-cert-btn" data-id="{{ site.pk }}" data-action="update_cert">
+        更新
+      </button>
+      <button class="tag tag-azure" name="copy-cert-btn" data-id="{{ site.pk }}" data-action="copy">
+        备份
+      </button>
+    </td>
+  </tr>

@@ -1,0 +1,28 @@
+.mt-20{
+    margin-top: 20px;
+}
+
+.mt-10{
+    margin-top: 10px;
+}
+
+.mr-20{
+    margin-right: 20px;
+}
+
+div.pd-10{
+    padding: 10px;
+}
+
+.a-i{
+    color: #409eff;
+    font-size: 20px;
+} 
+
+a.clean{
+    text-decoration: none;
+}
+
+.hide{
+    display: none;
+}

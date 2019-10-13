@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>与或非科技站点检测工具</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="{% static 'app/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/media.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/comment.css' %}">
+    <link href="{% static 'app/css/dashboard.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'app/css/font-awesome.min.css' %}">
+    <script src="{% static 'app/js/vendors/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'app/js/require.min.js' %}"></script>
+    <script src="{% static 'app/js/dashboard.js' %}"></script>
+</head>
+<body>
+    {% if msg %}
+    <div class="msg text-center">
+      <div class="alert alert-{{ msg_type }} alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert"></button>
+        {{ msg }}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="header">
+        <h3 class="sm-center">与或非站点检测工具</h3>
+    </div>
+    <div class="container">
+        <h3 class="sm-center">项目列表</h3>
+        <div class="card">
+          {% if sites %}
+          <form action="{% url 'verification' %}" method="POST" id="verification_site_form">
+            {% csrf_token %}
+            <div class="table-responseive">
+            <table class="table card-table table-striped table-vcenter">
+                <thead>
+                  <tr class=>
+                    <th name="is_verification">
+                      <input type="checkbox" id="select-all" checked name="verificate-all" >
+                    </th>
+                    <th name="is-ignore-td">自动检测</th>
+                    <th name="site-name-th">站点名称</th>
+                    <th name="site-coding-th">Coding 仓库</th>
+                    <th name="site-https-th">检查HTTPS</th>         
+                    <th name='site-options'>操作</th>
+                    <th name='run-script'>执行</th>
+                  </tr>
+                </thead>
+                <tbody name="site-list">
+                  {% for site in sites %}
+                  <tr data-num="{{ site.pk }}">
+                    <td name="is_verification">
+                      <input type="checkbox" name="site-pk-checkbox" value="{{ site.pk }}" {% if site.is_ignore %}checked{% endif %}>
+                    </td>
+                    <td name='is-ignore-td'>
+                      <input type="checkbox" name="is-ignore" value="{{ site.pk }}" {% if site.is_ignore %}{% else %}checked='true'{% endif %} >
+                    </td>
+                    <td name="site-name"><a href="{% if site.need_verification %}https{% else %}http{% endif %}://{{ site.href }}">{{ site.name }}</a></td>
+                    <td name="site-coding">
+                      {% if site.coding %}
+                        <a href="http://{{ site.coding }}" class="tag tag-primary" target="_blank">
+                          进入
+                        </a>
+                      {% else %}
+                        <span class="tag tag-gray">暂无</span>
+                      {% endif %}
+                    </td>
+                    <td name="site-needverification">
+                      <span class="tag tag-{% if site.need_verification %}pink{% else %}blue{% endif %}">{{ site.need_verification }}</span>
+                    </td>
+                    <td name="site-options">
+                      <a class="mr-20" href="javascript:void(0)" data-type="editor-site" data-name="{{ site.name }}" data-href="{{ site.href }}" data-coding="{% if site.coding %}{{ site.coding }}{% endif %}" data-verification="{{ site.need_verification }}" data-num="{{ site.pk }}" data-overseas="{{ site.overseas }}" data-deploy="{{ site.deploy }}" data-restart="{{ site.restart }}" data-update-cert="{{ site.update_cert }}" data-copy="{{ site.copy }}">
+                        编辑
+                      </a>
+
+                      <a href="javascript:void(0)" class="" data-type="delete-site" data-num="{{ site.pk }}">
+                        删除
+                      </a>
+                    </td>
+                    <td name="run-script">
+                      <button class="tag tag-pink" name="restart-btn" data-id="{{ site.pk }}" data-action="restart">
+                        重启
+                      </button>
+                      <button class="tag tag-blue" data-action="deploy" name="deploy-btn" data-id="{{ site.pk }}">
+                        部署
+                      </button>
+                      <button class="tag tag-azure" data-action="update_cert" name="update-cert-btn" data-id="{{ site.pk }}">
+                        更新
+                      </button>
+                      <button class="tag tag-azure" data-action="update_cert" name="copy" data-id="{{ site.pk }}">
+                        备份
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            </form>
+          {% else %}
+          <div class="mt-20">
+            <h2 class='text-center'>暂无数据</h2>
+          </div>
+          {% endif %}
+        </div>
+        
+        <div class="operate-btn">
+            <a href="javascript:void(0);" class="btn btn-success mr-20" id="start-verification">检测站点</a>
+            <button class="btn btn-primary" id="add-site">增加站点</button>
+        </div>
+        
+        <div class="history">
+            <div class="card">
+              {% if history_list %}
+                <div class="table-response">
+                    <table class="table table-hover table-outline table-vcenter card-table text-center" >
+                      <thead>
+                        <tr>
+                          <th>日期</th>
+                          <th>站点</th>
+                          <th class="text-center">是否通过</th>
+                        </tr>
+                      </thead>
+
+                      <tbody name="history-tbody">
+                        {% for history in page_obj %}
+                          <tr class="{% if history.site_type != '1' %}tr-warning{% endif%}" name="show-site-description">
+                            <td name='history-date'>
+                              {{ history.verification_date|date:'Y-m-d' }}<br>
+                              {{ history.verification_date|date:'H:i' }}
+                            </td>
+                            <td name="site-name">
+                              {{ history.site.name }}
+                            </td>
+                            <td class="text-center" name="history-site-isok">
+                              <div>
+                                <a href="javascript:void(0);" 
+                                  style="text-decoration: none;">
+                                  {% if history.site_type == '1' %}
+                                    通过
+                                  {% else %}
+                                    <span class="text-danger">未通过</span>
+                                  {% endif %}
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr class="{% if history.site_type != '1' %}tr-warning{% endif%} hide" name="site-description">
+                            <td class="{% if history.status_code != '200' %}
+                                text-danger{% endif %}">
+                              状态码 <br>{{ history.status_code }}
+                            </td>
+                            {% if history.ping_time %}
+                              <td>响应时间<br>{{ history.ping_time }}毫秒</td>
+                            {% else %}
+                              <td class="text-danger">超时</td> 
+                            {% endif %}
+                            <td class="text-center">
+                              {% if history.certificate %}
+                                <span class=">{% if history.certificate <= 14 %}text-danger{% endif %}">证书剩余时间<br>{{ history.certificate }}天</span>
+                              {% elif history.certificate == 0 %}
+                                <span class="text-danger">证书已过期</span>
+                              {% else %}
+                                <span>证书：无</span>
+                              {% endif %}
+                            </td>
+                          </tr>
+                        {% endfor %}
+                       </tbody>
+                    </table>
+                </div>
+              {% else %}
+                <h3 class="text-center mt-20">暂无数据</h3>
+              {% endif %}
+            </div>
+        </div>
+        {% if page_obj %}
+          <div class="pagination-wrap text-center my-footer">
+            <ul class="pagination">
+              <li class="page-item">
+                {% if page_obj.has_previous %}
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                {% else %}
+                  <a href="javascript:void(0);" class="page-link">&lt;</a>
+                {% endif %}
+              </li>
+              <li class="page-item active"><a class="page-link">{{ page_obj.number }}</a></li>
+              <li class="page-item">
+                {% if page_obj.has_next %}
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                {% else %}
+                  <a href="javascript:void(0);" class="page-link">&gt;</a>
+                {% endif %}
+              </li>
+            </ul>
+
+          </div>
+        {% endif %}
+    </div>
+    
+    <div class="popo">
+        <div class="col mx-auto popo-content">
+          <span class="popo-close"><i class="fa fa-close"></i></span>
+          <form class="card" action="{% url 'add_site' %}" method="post" id="add-site-form">
+            {% csrf_token %}
+            <div class="card-body">
+              <div class="card-title">添加站点</div>
+              <div class="form-group">
+                <label class="form-label">站点名称</label>
+                <input type="text" class="form-control" name="name" placeholder="请输入站点名称">
+              </div>
+              <div class="form-group">
+                <label class="form-label">站点网址</label>
+                <div class="input-group">
+                  <span class="input-group-prepend" id="basic-addon3">
+                    <span class="input-group-text">http://</span>
+                  </span>
+                  <input type="text" name="href" class="form-control" placeholder="请输入网址">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">coding网址</label>
+                <div class="input-group">
+                  <span class="input-group-prepend" id="basic-addon3">
+                    <span class="input-group-text">http://</span>
+                  </span>
+                  <input type="input" name="coding" class="form-control" placeholder="请输入网址">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-label">是否是HTTPS</div>
+                <label class="custom-switch">
+                  <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input">
+                  否&nbsp;&nbsp;
+                  <span class="custom-switch-indicator"></span>
+                  <span class="custom-switch-description">是</span>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label">是否国外服务器</div>
+                <label class="custom-switch">
+                  <input type="checkbox" name="overseas-switch-checkbox" class="custom-switch-input">
+                  否&nbsp;&nbsp;
+                  <span class="custom-switch-indicator"></span>
+                  <span class="custom-switch-description">是</span>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">重启</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" value="{{ site.restart }}" name="restart">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">部署</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" value="{{ site.deploy }}" name="deploy">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">更新证书</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" value="{{ site.update_cert }}" name="update_cert">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">备份</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" value="{{ site.copy }}" name="copy">
+                </div>
+              </div>
+
+              <div class="form-group" style="float: right;">
+                <a class="btn btn-primary mr-20" id="add-site-btn" href="javascript:void(0);">确定</a>
+                <a class="btn btn-secondary" id='concel-add-site' href="javascript: void(0);">取消</a>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+
+    <div class="mask">
+      <div class="dimmer active">
+        <div class="loader"></div>
+        <div class="runing-text text-center mt-20"><h3>执行中</h3></div>
+      </div>
+    </div>
+
+    <script src="{% static 'app/js/base.js' %}"></script>    
+</body>
+</html>

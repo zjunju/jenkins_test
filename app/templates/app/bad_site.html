@@ -1,0 +1,12 @@
+{% for history in site_history %}
+    {% if history.site_type == '3' %}
+        <h3>(<a href="{% if history.site.need_verification %}https://{% else %}http://{% endif %}{{ history.site.href }}">{{ history.site.name }}</a>)访问异常，状态码{{ history.status_code }}</h3>  
+    {% elif history.site_type == '4' %}
+        <h3>(<a href="{% if history.site.need_verification %}https://{% else %}http://{% endif %}{{ history.site.href }}">{{ history.site.name }}</a>)访问异常，连接超时</h3>
+    {% elif history.site_type == '2' %}
+        <h3>
+            (<a href="{% if history.site.need_verification %}https://{% else %}http://{% endif %}{{ history.site.href }}">{{ history.site.name }}</a>)
+            证书即将到期
+        </h3>
+    {% endif %}
+{% endfor %}

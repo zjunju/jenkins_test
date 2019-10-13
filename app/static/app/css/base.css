@@ -1,0 +1,178 @@
+a{
+    text-decoration: none!important;
+}
+
+div.header{
+    background-color: #409eff;
+    color: white;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+div.header h3{
+    padding: 10px 40px;
+    line-height: 40px;
+    font-size: 18px;
+    margin: 0;
+}
+
+div.container{
+    width: 100%;
+    max-width: 1000px;
+}
+
+div.container>h3{
+    font-family: "微软雅黑";
+    font-weight: bolder;
+}
+
+tr.menu>th{
+    color: black;
+}
+
+
+.small-btn{
+    padding: 3px 5px!important;
+
+}
+
+div.operate-btn{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+div.history{
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: '微软雅黑';
+    font-size: 20px;
+}
+
+
+tr.tr-warning{
+    background-color: #fdf5e6;
+}
+
+
+.text-danger{
+    color: red;
+}
+
+/* 模态框 */
+div.popo{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    display: none;
+    background-color: rgba(0,0,0, 0.2);
+}
+
+div.popo-content{
+    width: 50%;
+    background: #fff;
+    position: relative;
+    margin: 100px auto 50px;
+    z-index: 1001;
+    display: none;
+}
+
+div.popo-content form{
+    border: none!important;
+    
+}
+
+div.popo span.popo-close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 1002;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+div.box{
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+div.msg{
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    margin-left: -500px;
+    width: 1000px;
+    z-index: 1002;
+
+}
+
+
+ul.pagination{
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+tr[name=show-site-description]{
+    cursor: pointer;
+}
+
+td[name=site-options] a{
+    text-decoration: none;
+}
+
+
+.my-footer{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+th[name=is_verification]{
+    width: 70px;
+    box-sizing: border-box;
+}
+/*is-ignore-td*/
+
+[name=is-ignore-td], [name=site-name-th], [name=site-name]{
+    text-align:center;
+}
+
+div.mask{
+    background-color: rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    display: none;
+}
+
+
+.dimmer{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /*transform: translate(-50%, -50%)*/
+    transform: translateX(-50%);
+}
+
+div.runing-text{
+    padding-top: 70px;
+    margin-top: -70px;
+
+}
+
+td[name=run-script] button{
+    margin-left: 10px;
+}
