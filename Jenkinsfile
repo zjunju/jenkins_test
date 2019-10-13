@@ -5,12 +5,11 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'python --version'
-                sh 'python -m pip list'
-                sh 'python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple/'
-                sh 'python -m pip install --upgrade setuptools -i https://pypi.tuna.tsinghua.edu.cn/simple/'
-                sh 'python -m pip install -r requirments.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/ ' 
-                sh '. restart.sh'
+                sh 'ls -al '
+               # sh 'python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple/'
+               # sh 'python -m pip install --upgrade setuptools -i https://pypi.tuna.tsinghua.edu.cn/simple/'
+               # sh 'python -m pip install -r requirments.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/ ' 
+               # sh '. restart.sh'
             }
         }
     }
