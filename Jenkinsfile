@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'ls -al '
+                sh 'cat restart.sh'
             }
         }
     }
