@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh '. restart.sh'
+                sh 'ls -al'
+                sh 'python'
             }
         }
     }
