@@ -6,7 +6,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
-                sh 'python -m pip install -r requirments.txt'
+                sh 'python -m pip install -r requirments.txt -i http://mirrors.aliyun.com/pypi/simple/ '
             }
         }
     }
