@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh 'python --version'
                 sh 'python -m pip list'
-                sh 'python -m pip --upgrade pip'
+                sh 'python -m pip install --upgrade pip'
                 sh 'python -m pip install -r requirments.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/ ' 
             }
         }
